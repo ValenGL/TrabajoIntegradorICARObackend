@@ -7,12 +7,12 @@ const router = Router();
 router.get("/", UserController.getAll);
 
 // Get one user
-router.get("/:id", UserController.getAll);
+router.get("/:id", UserController.getById);
 
 // Create new user
 router.post("/", UserController.newUser);
 
-// Create new user
+// Edit user
 router.patch("/:id", UserController.editUser);
 
 // Delete user

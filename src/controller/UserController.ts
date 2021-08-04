@@ -8,6 +8,7 @@ export class UserController {
     const userRepository = getRepository(User);
     try {
       const users = await userRepository.find();
+      res.send(users);
     } catch (e) {
       res.status(400).json({ menssage: "Something goes wrong" });
     }
@@ -18,7 +19,7 @@ export class UserController {
     const userRepository = getRepository(User);
     try {
       const user = await userRepository.findOneOrFail(id);
-      res.send(User);
+      res.send(user);
     } catch (e) {
       res.status(404).json({ message: "Not result" });
     }
@@ -38,10 +39,9 @@ export class UserController {
       return res.status(400).json(errors);
     }
 
-    // TO DO: HASH PASSWORD
-
     const userRepository = getRepository(User);
     try {
+      user.hashPassword();
       await userRepository.save(user);
     } catch (e) {
       return res.status(409).json({ message: "Username already exists" });
