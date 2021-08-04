@@ -34,7 +34,8 @@ export class UserController {
     user.role = role;
 
     // Validate
-    const errors = await validate(user);
+    const validationOpt = { validationError: { target: false, value: false } };
+    const errors = await validate(user, validationOpt);
     if (errors.length > 0) {
       return res.status(400).json(errors);
     }
@@ -64,8 +65,8 @@ export class UserController {
     } catch (e) {
       return res.status(404).json({ message: "User not found" });
     }
-
-    const errors = await validate(user);
+    const validationOpt = { validationError: { target: false, value: false } };
+    const errors = await validate(user, validationOpt);
     if (errors.length > 0) {
       return res.status(400).json(errors);
     }
