@@ -7,6 +7,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 import { MinLength, IsNotEmpty } from "class-validator";
+// TO DO IsEmail
 
 @Entity()
 @Unique(["username"])
