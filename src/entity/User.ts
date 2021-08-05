@@ -6,9 +6,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
 } from "typeorm";
-import { MinLength, IsNotEmpty } from "class-validator";
+import { MinLength, IsNotEmpty, IsEmail } from "class-validator";
 import * as bcrypt from "bcryptjs";
-// TO DO IsEmail
 
 @Entity()
 @Unique(["username"])
@@ -18,10 +17,13 @@ export class User {
 
   @Column()
   @MinLength(6)
+  @IsEmail()
+  @IsNotEmpty()
   username: string;
 
   @Column()
   @MinLength(8)
+  @IsNotEmpty()
   password: string;
 
   @Column()
@@ -30,10 +32,12 @@ export class User {
 
   @Column()
   @CreateDateColumn()
+  @IsNotEmpty()
   createdAt: Date;
 
   @Column()
   @UpdateDateColumn()
+  @IsNotEmpty()
   updatedAt: Date;
 
   hashPassword(): void {
@@ -44,6 +48,4 @@ export class User {
   checkPassword(password: string): boolean {
     return bcrypt.compareSync(password, this.password);
   }
-
-  // TO DO resto de los campos
 }

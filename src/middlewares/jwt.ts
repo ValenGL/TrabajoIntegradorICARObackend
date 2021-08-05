@@ -20,6 +20,6 @@ export const checkJwt = (req: Request, res: Response, next: NextFunction) => {
   });
   res.setHeader("token", newToken);
 
-  //Call next
+  // Call next
   next();
 };
